@@ -10,7 +10,7 @@ import nltk
 import fitz
 import re
 
-subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+subprocess.run(["python -m spacy download en_core_web_sm"])
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
@@ -73,6 +73,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
