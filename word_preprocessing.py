@@ -40,7 +40,6 @@ words = re.findall(r"[A-Za-zÀ-ÿ]+", words)
 clean_words = []
 
 # ==== Lemmatizitation ====
-stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
 for word in words:
@@ -72,3 +71,4 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
