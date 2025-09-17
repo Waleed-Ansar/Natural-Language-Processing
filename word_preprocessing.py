@@ -10,6 +10,7 @@ import nltk
 import fitz
 import re
 
+!pip install 'en_core_web_sm'
 # subprocess.run(["python -m spacy download en_core_web_sm"])
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -73,6 +74,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
