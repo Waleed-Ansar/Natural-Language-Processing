@@ -1,6 +1,4 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import word_tokenize, sent_tokenize
-from nltk.stem import LancasterStemmer
 from nltk import WordNetLemmatizer
 from nltk.corpus import stopwords
 from collections import Counter
@@ -35,6 +33,7 @@ text = " ".join(book)
 text = re.sub(r'\\n', "", text)
 
 sentences = sent_tokenize(text)
+
 
 
 # python sent_preprocessing.py
