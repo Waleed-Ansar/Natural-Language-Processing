@@ -1,11 +1,5 @@
-from nltk.tokenize import word_tokenize, sent_tokenize
-from nltk import WordNetLemmatizer
-from nltk.corpus import stopwords
-from collections import Counter
+from nltk.tokenize import sent_tokenize
 import pandas as pd
-import unicodedata
-import string
-import spacy
 import nltk
 import fitz
 import re
@@ -37,3 +31,4 @@ sentences = sent_tokenize(text)
 
 
 # python sent_preprocessing.py
+
