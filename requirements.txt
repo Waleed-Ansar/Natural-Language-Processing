@@ -3,4 +3,4 @@ matplotlib
 pandas
 nltk
 spacy
-fitz
+pymupdf
