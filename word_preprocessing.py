@@ -1,9 +1,6 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import word_tokenize
 from spacy.lang.en.stop_words import STOP_WORDS
 from nltk import WordNetLemmatizer
-from nltk.corpus import stopwords
-from collections import Counter
 from nltk import FreqDist
 import pandas as pd
 import unicodedata
@@ -71,6 +68,7 @@ def search_word(word):
     query_count = FreqDist(clean_words)
     count = query_count[word]
     return count
+
 
 
 # python word_preprocessing.py
