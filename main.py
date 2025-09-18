@@ -7,8 +7,8 @@ import pandas as pd
 import numpy as np
 
 
-if "download" not in st.session_state:
-    st.session_state.download = wp.download()
+if "load" not in st.session_state:
+    st.session_state.download = wp.load()
 
 if "s_df" not in st.session_state:
     st.session_state.s_df = pd.DataFrame(sp.sentences, columns=['text'])
@@ -60,6 +60,7 @@ if st.session_state.show_pos:
 
 
 # streamlit run main.py
+
 
 
 
