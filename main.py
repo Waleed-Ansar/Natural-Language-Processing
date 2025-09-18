@@ -6,38 +6,91 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-s_df = pd.DataFrame(sp.sentences, columns=['text'])
-s_df = s_df[s_df["text"] != "."]
 
-text = " ".join(wp.clean_words)
+if "s_df" not in st.session_state:
+    st.session_state.s_df = pd.DataFrame(sp.sentences, columns=['text'])
+    st.session_state.s_df = st.session_state.s_df[st.session_state.s_df["text"] != "."]
 
-word_cloud = WordCloud(background_color='white', max_words=1000).generate(text)
+if "word_cloud" not in st.session_state:
+    text = " ".join(wp.clean_words)
+    st.session_state.word_cloud = WordCloud(background_color="white", max_words=1000).generate(text)
 
-# c_df = pd.DataFrame(wp.counts)
+if "counts" not in st.session_state:
+    st.session_state.counts = wp.counts
+
+if "pos" not in st.session_state:
+    st.session_state.pos = wp.pos
+
+if "ner" not in st.session_state:
+    st.session_state.ner = wp.ner_words
+
+for key in ["show_image", "show_sentences", "show_words", "show_pos", "show_ner"]:
+    if key not in st.session_state:
+        st.session_state[key] = False
+
 
 
 st.title("Natural Language Processing Statistics")
 
 st.subheader("Show Word Cloud:")
-if st.button('show image'):
-    st.image(word_cloud.to_array(), use_container_width=True)
+st.button("Show image", on_click=lambda: st.session_state.update(show_image=True))
+if st.session_state.show_image:
+    st.image(st.session_state.word_cloud.to_array(), use_container_width=True)
 
-st.subheader("Show All Lines Separately")
-if st.button('show sentences'):
-    st.table(s_df)
+st.subheader("Show All Lines:")
+st.button("Show sentences", on_click=lambda: st.session_state.update(show_sentences=True))
+if st.session_state.show_sentences:
+    st.table(st.session_state.s_df)
 
 st.subheader("Show Word Frequency Count:")
-if st.button('show words'):
-    st.table(wp.counts)
+st.button("Show words", on_click=lambda: st.session_state.update(show_words=True))
+if st.session_state.show_words:
+    st.table(st.session_state.counts)
 
 st.subheader("Enter Word to Check Frequency:")
-word = st.text_input("Enter:" )
-if st.button('enter'):
-    st.text(wp.search_word(word.lower()))
+word = st.text_input("Enter:", key="word_input")
+if st.button("Enter"):
+    if st.session_state.word_input:
+        st.text(wp.search_word(st.session_state.word_input.lower()))
 
 st.subheader("Show All words POS:")
-if st.button('show pos'):
-    st.table(wp.pos)
+st.button("Show pos", on_click=lambda: st.session_state.update(show_pos=True))
+if st.session_state.show_pos:
+    st.table(st.session_state.pos)
+
+
+# s_df = pd.DataFrame(sp.sentences, columns=['text'])
+# s_df = s_df[s_df["text"] != "."]
+
+# text = " ".join(wp.clean_words)
+
+# word_cloud = WordCloud(background_color='white', max_words=1000).generate(text)
+
+# # c_df = pd.DataFrame(wp.counts)
+
+
+# st.title("Natural Language Processing Statistics")
+
+# st.subheader("Show Word Cloud:")
+# if st.button('show image'):
+#     st.image(word_cloud.to_array(), use_container_width=True)
+
+# st.subheader("Show All Lines Separately")
+# if st.button('show sentences'):
+#     st.table(s_df)
+
+# st.subheader("Show Word Frequency Count:")
+# if st.button('show words'):
+#     st.table(wp.counts)
+
+# st.subheader("Enter Word to Check Frequency:")
+# word = st.text_input("Enter:" )
+# if st.button('enter'):
+#     st.text(wp.search_word(word.lower()))
+
+# st.subheader("Show All words POS:")
+# if st.button('show pos'):
+#     st.table(wp.pos)
 
 # st.subheader("Show NER:")
 # if st.button('show ner'):
@@ -45,5 +98,6 @@ if st.button('show pos'):
 
 
 # streamlit run main.py
+
 
 
