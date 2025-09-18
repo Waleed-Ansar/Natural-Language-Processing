@@ -54,6 +54,12 @@ for word in words:
 # ==== POS ====
 pos = nltk.pos_tag(list(set(clean_words)))
 
+def search_pos(word):
+    pos_list = []
+    pos_list.append(word)
+    query_pos = nltk.pos_tag(pos_list)
+    return query_pos
+
 # ==== NER ====
 # txt = " ".join(list(set(clean_words)))
 # ner = spacy.load('en_core_web_sm')
@@ -74,6 +80,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
