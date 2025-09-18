@@ -67,7 +67,7 @@ def search_pos(word):
 # ==== NER ====
 ners = []
 
-words = list(set(wp.clean_words))
+words = list(set(clean_words))
 words = words[3000:4000]
 tagger = SequenceTagger.load("ner")
 for word in words:
@@ -94,6 +94,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
