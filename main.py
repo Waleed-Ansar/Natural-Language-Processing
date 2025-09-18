@@ -67,7 +67,15 @@ st.button("Show ner", on_click=lambda: st.session_state.update(show_ner=True))
 if st.session_state.show_ner:
     st.table(wp.all_ners())
 
+st.subheader("Enter Word to Check NER:")
+wrd = st.text_input("Enter", key='input_a_word')
+if st.button("search"):
+    if st.session_state.input_a_word:
+        st.table(wp.search_ners(st.session_state.input_a_word.lower()))
+
+
 # streamlit run main.py
+
 
 
 
