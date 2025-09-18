@@ -56,8 +56,14 @@ st.button("Show pos", on_click=lambda: st.session_state.update(show_pos=True))
 if st.session_state.show_pos:
     st.table(st.session_state.pos)
 
+st.subheader("Enter Word to Check POS:")
+wrd = st.text_input("Enter", key='input_word')
+if st.button("search"):
+    if st.session_state.input_word:
+        st.table(wp.search_pos(st.session_state.input_word.lower()))
 
 # streamlit run main.py
+
 
 
 
