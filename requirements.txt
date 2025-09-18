@@ -2,5 +2,5 @@ wordcloud
 matplotlib
 pandas
 nltk
-spacy==3.7.2
+spacy
 pymupdf
