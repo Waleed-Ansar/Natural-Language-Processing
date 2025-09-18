@@ -3,12 +3,13 @@ import matplotlib.pyplot as plt
 import word_preprocessing as wp
 import sent_preprocessing as sp
 import streamlit as st
+from spacy.cli import download
 import pandas as pd
 import numpy as np
 
-
-if "load" not in st.session_state:
-    st.session_state.download = wp.load()
+MODEL = "en_core_web_sm"
+if "download" not in st.session_state:
+    st.session_state.download = download(MODEL)
 
 if "s_df" not in st.session_state:
     st.session_state.s_df = pd.DataFrame(sp.sentences, columns=['text'])
@@ -60,6 +61,7 @@ if st.session_state.show_pos:
 
 
 # streamlit run main.py
+
 
 
 
