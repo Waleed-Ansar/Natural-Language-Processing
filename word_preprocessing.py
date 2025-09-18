@@ -9,18 +9,12 @@ import spacy
 import nltk
 import fitz
 import re
-
 import streamlit as st
 
 if "nlp" not in st.session_state:
-    # Load once and keep in session_state
-    try:
-        st.session_state.nlp = spacy.load("en_core_web_sm")
-    except OSError:
-        # Download once if missing
-        from spacy.cli import download
-        download("en_core_web_sm")
-        st.session_state.nlp = spacy.load("en_core_web_sm")
+    from spacy.cli import download
+    download("en_core_web_sm")
+    st.session_state.nlp = spacy.load("en_core_web_sm")
 
 # subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
 nltk.download('stopwords')
@@ -85,6 +79,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
