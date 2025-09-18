@@ -10,8 +10,9 @@ def ask_question(query):
   context = text
   question = query
   
-  result = qa(question=question, context=context, batch_size=2, top_k=2, max_answer_len=30)
+  result = qa(question=question, context=context)
   answer = result["answer"]
   return answer
+
 
 
