@@ -40,10 +40,10 @@ st.subheader("Show All words POS:")
 if st.button('show pos'):
     st.table(wp.pos)
 
-st.subheader("Show NER:")
-
-if st.button('show ner'):
-    st.table(wp.ner_words)
+# st.subheader("Show NER:")
+# if st.button('show ner'):
+#     st.table(wp.ner_words)
 
 
 # streamlit run main.py
+
