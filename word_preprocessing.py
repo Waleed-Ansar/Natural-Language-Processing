@@ -65,17 +65,19 @@ def search_pos(word):
         return query_pos
 
 # ==== NER ====
-ners = []
-
-words = list(set(clean_words))
-words = words[3000:4000]
-tagger = SequenceTagger.load("ner")
-for word in words:
-    sentence = Sentence(word)
-    tagger.predict(sentence)
-    formatted = [f'"{entity.text}" ==> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
-    if formatted != []:
-        ners.append(formatted)
+def all_ners():
+    ners = []
+    
+    words = list(set(clean_words))
+    words = words[3000:4000]
+    tagger = SequenceTagger.load("ner")
+    for word in words:
+        sentence = Sentence(word)
+        tagger.predict(sentence)
+        formatted = [f'"{entity.text}" ==> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
+        if formatted != []:
+            ners.append(formatted)
+    return ners
 
 def search_ner(word):
     sentence = Sentence(word)
@@ -94,6 +96,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
