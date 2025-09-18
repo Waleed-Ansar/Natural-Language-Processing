@@ -4,3 +4,6 @@ pandas
 nltk
 pymupdf
 spacy
+flair
+transformers
+torch
