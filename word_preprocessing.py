@@ -12,10 +12,6 @@ import fitz
 import re
 
 
-MODEL_NAME = "en_core_web_sm"
-def load():
-    download(MODEL_NAME)
-
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
@@ -78,6 +74,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
