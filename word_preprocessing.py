@@ -80,6 +80,7 @@ def all_ners():
     return ners
 
 def search_ner(word):
+    tagger = SequenceTagger.load("ner")
     sentence = Sentence(word)
     tagger.predict(sentence)
     formatted = [f'"{entity.text}" --> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
@@ -96,6 +97,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
