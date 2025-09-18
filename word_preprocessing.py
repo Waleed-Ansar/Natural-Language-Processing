@@ -56,13 +56,13 @@ for word in words:
 pos = nltk.pos_tag(list(set(clean_words)))
 
 # ==== NER ====
-txt = " ".join(list(set(clean_words)))
-ner = spacy.load('en_core_web_sm')
-ner_tokens = ner(txt)
+# txt = " ".join(list(set(clean_words)))
+# ner = spacy.load('en_core_web_sm')
+# ner_tokens = ner(txt)
 
-ner_words = []
-for token in ner_tokens.ents:
-    ner_words.append(f"{token}, {token.label_}")
+# ner_words = []
+# for token in ner_tokens.ents:
+#     ner_words.append(f"{token}, {token.label_}")
 
 # ==== Counting Data ====
 counts = FreqDist(clean_words)
@@ -75,6 +75,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
