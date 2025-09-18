@@ -1,6 +1,8 @@
 from nltk.tokenize import word_tokenize
 from spacy.lang.en.stop_words import STOP_WORDS
+from flair.models import SequenceTagger
 from nltk import WordNetLemmatizer
+from flair.data import Sentence
 from nltk import FreqDist
 import pandas as pd
 from spacy.cli import download
@@ -63,13 +65,23 @@ def search_pos(word):
         return query_pos
 
 # ==== NER ====
-# txt = " ".join(list(set(clean_words)))
-# ner = spacy.load('en_core_web_sm')
-# ner_tokens = ner(txt)
+ners = []
 
-# ner_words = []
-# for token in ner_tokens.ents:
-#     ner_words.append(f"{token}, {token.label_}")
+words = list(set(wp.clean_words))
+words = words[3000:4000]
+tagger = SequenceTagger.load("ner")
+for word in words:
+    sentence = Sentence(word)
+    tagger.predict(sentence)
+    formatted = [f'"{entity.text}" ==> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
+    if formatted != []:
+        ners.append(formatted)
+
+def search_ner(word):
+    sentence = Sentence(word)
+    tagger.predict(sentence)
+    formatted = [f'"{entity.text}" ==> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
+    return formatted
 
 # ==== Counting Data ====
 counts = FreqDist(clean_words)
@@ -82,6 +94,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
