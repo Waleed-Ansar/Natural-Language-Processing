@@ -3,6 +3,7 @@ from spacy.lang.en.stop_words import STOP_WORDS
 from nltk import WordNetLemmatizer
 from nltk import FreqDist
 import pandas as pd
+from spacy.cli import download
 import subprocess
 import unicodedata
 import spacy
@@ -10,9 +11,11 @@ import nltk
 import fitz
 import re
 
+
+MODEL_NAME = "en_core_web_sm"
 def download():
-    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
-    return spacy.load('en_core_web_sm')
+    download(MODEL_NAME)
+
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
@@ -75,6 +78,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
