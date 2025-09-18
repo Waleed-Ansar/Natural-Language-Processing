@@ -6,6 +6,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+wp.download()
 s_df = pd.DataFrame(sp.sentences, columns=['text'])
 s_df = s_df[s_df["text"] != "."]
 
@@ -43,5 +44,6 @@ st.subheader("Show NER:")
 
 if st.button('show ner'):
     st.table(wp.ner_words)
+
 
 # streamlit run main.py
