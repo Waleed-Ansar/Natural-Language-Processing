@@ -13,7 +13,7 @@ import re
 
 
 MODEL_NAME = "en_core_web_sm"
-def download():
+def load():
     download(MODEL_NAME)
 
 nltk.download('stopwords')
@@ -78,6 +78,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
