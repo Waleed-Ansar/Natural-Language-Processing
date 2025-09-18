@@ -7,3 +7,5 @@ spacy
 flair
 transformers
 torch
+langchain
+langchain-huggingface
