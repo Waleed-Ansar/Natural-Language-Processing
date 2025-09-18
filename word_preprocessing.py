@@ -74,7 +74,7 @@ def all_ners():
     for word in words:
         sentence = Sentence(word)
         tagger.predict(sentence)
-        formatted = [f'"{entity.text}" ==> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
+        formatted = [f'"{entity.text}" --> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
         if formatted != []:
             ners.append(formatted)
     return ners
@@ -82,7 +82,7 @@ def all_ners():
 def search_ner(word):
     sentence = Sentence(word)
     tagger.predict(sentence)
-    formatted = [f'"{entity.text}" ==> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
+    formatted = [f'"{entity.text}" --> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
     return formatted
 
 # ==== Counting Data ====
@@ -96,6 +96,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
