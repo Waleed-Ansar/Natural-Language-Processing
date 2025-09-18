@@ -22,12 +22,10 @@ qa = pipeline("question-answering", model="distilbert-base-cased-distilled-squad
 
 
 def ask_question(query):
-  context = summary
-  question = query
-  
-  result = qa(question=question, context=context)
+  result = qa(question=query, context=summary)
   answer = result["answer"]
   return answer
+
 
 
 
