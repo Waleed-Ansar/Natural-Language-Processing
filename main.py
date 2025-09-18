@@ -7,9 +7,6 @@ from spacy.cli import download
 import pandas as pd
 import numpy as np
 
-MODEL = "en_core_web_sm"
-if "download" not in st.session_state:
-    st.session_state.download = download(MODEL)
 
 if "s_df" not in st.session_state:
     st.session_state.s_df = pd.DataFrame(sp.sentences, columns=['text'])
@@ -61,6 +58,7 @@ if st.session_state.show_pos:
 
 
 # streamlit run main.py
+
 
 
 
