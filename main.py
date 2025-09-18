@@ -21,9 +21,6 @@ if "counts" not in st.session_state:
 if "pos" not in st.session_state:
     st.session_state.pos = wp.pos
 
-if "ner" not in st.session_state:
-    st.session_state.ner = wp.ner_words
-
 for key in ["show_image", "show_sentences", "show_words", "show_pos", "show_ner"]:
     if key not in st.session_state:
         st.session_state[key] = False
@@ -60,6 +57,7 @@ if st.session_state.show_pos:
 
 
 # streamlit run main.py
+
 
 
 
