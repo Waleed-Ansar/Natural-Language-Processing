@@ -65,9 +65,10 @@ if st.button("search"):
 st.subheader("Show NER:")
 st.button("Show ner", on_click=lambda: st.session_state.update(show_ner=True))
 if st.session_state.show_ner:
-    st.table(st.session_state.ner)
+    st.table(st.session_state.formatted)
 
 # streamlit run main.py
+
 
 
 
