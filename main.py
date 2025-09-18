@@ -62,7 +62,13 @@ if st.button("search"):
     if st.session_state.input_word:
         st.table(wp.search_pos(st.session_state.input_word.lower()))
 
+st.subheader("Show NER:")
+st.button("Show ner", on_click=lambda: st.session_state.update(show_ner=True))
+if st.session_state.show_ner:
+    st.table(st.session_state.ner)
+
 # streamlit run main.py
+
 
 
 
