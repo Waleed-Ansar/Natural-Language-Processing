@@ -69,23 +69,20 @@ def all_ners():
     ners = []
     
     words = list(set(clean_words))
-    words = words[3000:4000]
+    words = words
     
-    for word in words:
-        tagger = SequenceTagger.load("ner")
-        sentence = Sentence(word)
-        tagger.predict(sentence)
-        formatted = [f'"{entity.text}" --> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
-        if formatted != []:
-            ners.append(formatted)
-    return ners
+    ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple")
+
+    results = ner(sp.text)
+    for entity in results:
+        return (f"{entity['word']} -> {entity['entity_group']}")
 
 def search_ner(word):
-    tagger = SequenceTagger.load("ner")
-    sentence = Sentence(word)
-    tagger.predict(sentence)
-    formatted = [f'"{entity.text}" --> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
-    return formatted
+    ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple")
+    
+    results = ner(word)
+    for entity in results:
+        return (f"{entity['word']} -> {entity['entity_group']}")
 
 # ==== Counting Data ====
 counts = FreqDist(clean_words)
@@ -98,6 +95,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
