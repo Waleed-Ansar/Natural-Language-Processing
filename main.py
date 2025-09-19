@@ -39,12 +39,12 @@ if st.session_state.show_image:
 st.subheader("Show All Lines:")
 st.button("Show sentences", on_click=lambda: st.session_state.update(show_sentences=True))
 if st.session_state.show_sentences:
-    st.table(st.session_state.s_df)
+    st.dataframe(st.session_state.s_df)
 
 st.subheader("Show Word Frequency Count:")
 st.button("Show words", on_click=lambda: st.session_state.update(show_words=True))
 if st.session_state.show_words:
-    st.table(st.session_state.counts)
+    st.dataframe(st.session_state.counts)
 
 st.subheader("Enter Word to Check Frequency:")
 word = st.text_input("Enter:", key="word_input")
@@ -55,24 +55,24 @@ if st.button("Enter"):
 st.subheader("Show All words POS:")
 st.button("Show pos", on_click=lambda: st.session_state.update(show_pos=True))
 if st.session_state.show_pos:
-    st.table(st.session_state.pos)
+    st.dataframe(st.session_state.pos)
 
 st.subheader("Enter Word to Check POS:")
 wrd = st.text_input("Enter", key='input_word')
 if st.button("search"):
     if st.session_state.input_word:
-        st.table(wp.search_pos(st.session_state.input_word.lower()))
+        st.dataframe(wp.search_pos(st.session_state.input_word.lower()))
 
 st.subheader("Show NER:")
 st.button("Show ner", on_click=lambda: st.session_state.update(show_ner=True))
 if st.session_state.show_ner:
-    st.table(wp.all_ners())
+    st.dataframe(wp.all_ners())
 
 st.subheader("Enter Word to Check NER:")
 wrd = st.text_input("Enter", key='input_a_word')
 if st.button("click"):
     if st.session_state.input_a_word:
-        st.table(wp.search_ner(st.session_state.input_a_word.lower()))
+        st.dataframe(wp.search_ner(st.session_state.input_a_word.lower()))
 
 st.subheader("Ask a Question about Article:")
 query = st.text_input("Question", key='query')
@@ -81,6 +81,7 @@ if st.button("ask"):
         st.text(qa.ask_question(st.session_state.query.lower()))
 
 # streamlit run main.py
+
 
 
 
