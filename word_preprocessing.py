@@ -66,7 +66,7 @@ text = "".join(book[40:106])
 
 ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", aggregation_strategy="average")
 
-def all_ner(text):
+def all_ners(text):
     entities = ner(text)
 
     result = []
@@ -94,6 +94,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
