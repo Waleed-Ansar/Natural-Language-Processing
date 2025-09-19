@@ -72,7 +72,7 @@ st.subheader("Enter Word to Check NER:")
 wrd = st.text_input("Enter", key='input_a_word')
 if st.button("click"):
     if st.session_state.input_a_word:
-        st.dataframe(wp.search_ner(st.session_state.input_a_word.lower()))
+        st.dataframe(wp.search_ner(st.session_state.input_a_word))
 
 st.subheader("Ask a Question about Article:")
 query = st.text_input("Question", key='query')
@@ -81,6 +81,7 @@ if st.button("ask"):
         st.text(qa.ask_question(st.session_state.query.lower()))
 
 # streamlit run main.py
+
 
 
 
