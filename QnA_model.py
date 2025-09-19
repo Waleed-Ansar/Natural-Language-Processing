@@ -13,7 +13,7 @@ def ask_question(query):
         },
         handle_impossible_answer=True,
         topk=1,
-        max_answer_len=200,
+        max_answer_len=500,
         doc_stride=128,
         max_seq_len=512
     )
@@ -21,4 +21,5 @@ def ask_question(query):
     # result = qa({"question": query, "context": sp.text})
     answer = result["answer"]
     return answer
+
 
