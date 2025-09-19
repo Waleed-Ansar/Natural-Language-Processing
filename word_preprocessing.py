@@ -15,7 +15,6 @@ import re
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
-nltk.download('averaged_perceptron_tagger_eng')
 
 # ==== Importing and Reading Data ====
 doc = fitz.open("the-strange-case-of-doctor-jekyll-and-mr-hyde-robert-louis-stevenson.pdf")
@@ -66,7 +65,7 @@ text = "".join(book[40:106])
 
 ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", aggregation_strategy="average")
 
-def all_ners(text):
+def all_ners():
     entities = ner(text)
 
     result = []
@@ -81,6 +80,8 @@ def all_ners(text):
 def search_ner(word):
     results = ner(word)
     for entity in results:
+        ntity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
+        entity_name = entity['word']
         return (f"{entity['word']} -> {entity['entity_group']}")
 
 # ==== Counting Data ====
@@ -94,6 +95,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
