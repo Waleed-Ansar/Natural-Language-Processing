@@ -63,20 +63,16 @@ def search_pos(word):
         return query_pos
 
 # ==== NER ====
+ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple")
+
 def all_ners():
     ners = []
     
-    words = list(set(clean_words))
-    
-    ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple")
-
-    results = ner(words)
+    results = ner(text)
     for entity in results:
         return (f"{entity['word']} -> {entity['entity_group']}")
 
 def search_ner(word):
-    ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple")
-    
     results = ner(word)
     for entity in results:
         return (f"{entity['word']} -> {entity['entity_group']}")
@@ -92,6 +88,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
