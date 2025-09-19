@@ -80,7 +80,7 @@ def all_ners():
 def search_ner(word):
     results = ner(word)
     for entity in results:
-        ntity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
+        entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
         entity_name = entity['word']
         return (f"{entity['word']} -> {entity['entity_group']}")
 
@@ -95,6 +95,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
