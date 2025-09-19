@@ -1,6 +1,7 @@
 from spacy.lang.en.stop_words import STOP_WORDS
 from nltk.tokenize import word_tokenize
 from nltk import WordNetLemmatizer
+from transformers import pipeline
 from flair.data import Sentence
 from nltk import FreqDist
 import pandas as pd
@@ -66,11 +67,10 @@ def all_ners():
     ners = []
     
     words = list(set(clean_words))
-    words = words
     
     ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple")
 
-    results = ner(sp.text)
+    results = ner(words)
     for entity in results:
         return (f"{entity['word']} -> {entity['entity_group']}")
 
@@ -92,6 +92,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
