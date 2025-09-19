@@ -18,9 +18,10 @@ def ask_question(query):
         max_seq_len=512
     )
     
-    # result = qa({"question": query, "context": sp.text})
+    result = qa({"question": query, "context": sp.text})
     answer = result["answer"]
     return answer
+
 
 
 
