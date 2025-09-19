@@ -28,7 +28,6 @@ for i in range(length):
     book.append(text)
 
 df = pd.DataFrame(book)
-# df.to_csv('pdf_to_csv.csv', index=False)
 
 text = " ".join(book)
 
@@ -63,14 +62,15 @@ def search_pos(word):
         return query_pos
 
 # ==== NER ====
-ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple")
+ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="average")
 
 def all_ners():
     ners = []
     
-    results = ner(text)
+    results = ner(book[50:100])
     for entity in results:
-        return (f"{entity['word']} -> {entity['entity_group']}")
+        ners.append(f"{entity['word']} -> {entity['entity_group']}")
+    return ners
 
 def search_ner(word):
     results = ner(word)
@@ -88,6 +88,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
