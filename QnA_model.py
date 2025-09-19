@@ -9,7 +9,7 @@ def ask_question(query):
     result = qa(
         {
             "question": query,
-            "context": context
+            "context": sp.text
         },
         handle_impossible_answer=True,
         topk=1,
@@ -21,6 +21,7 @@ def ask_question(query):
     # result = qa({"question": query, "context": sp.text})
     answer = result["answer"]
     return answer
+
 
 
 
