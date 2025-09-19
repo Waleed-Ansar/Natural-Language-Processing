@@ -78,12 +78,14 @@ def all_ners():
     return (set(result))
 
 def search_ner(word):
+    ner = []
+    
     results = ner(word)
     for entity in results:
         entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
         entity_name = entity['word']
-        return (f"{entity['word']} -> {entity['entity_group']}")
-
+        ner.append(f"{entity_name} --> {entity_type}")
+    return ner
 # ==== Counting Data ====
 counts = FreqDist(clean_words)
 
@@ -95,6 +97,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
