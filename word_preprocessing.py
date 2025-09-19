@@ -70,8 +70,9 @@ def all_ners():
     
     words = list(set(clean_words))
     words = words[3000:4000]
-    tagger = SequenceTagger.load("ner")
+    
     for word in words:
+        tagger = SequenceTagger.load("ner")
         sentence = Sentence(word)
         tagger.predict(sentence)
         formatted = [f'"{entity.text}" --> {entity.get_label("ner").value}' for entity in sentence.get_spans('ner')]
@@ -97,6 +98,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
