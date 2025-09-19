@@ -10,7 +10,7 @@ nltk.download('punkt_tab')
 nltk.download('averaged_perceptron_tagger_eng')
 
 # ==== Importing and Reading Data ====
-doc = fitz.open("John M. Barry - The Great Influenza - The story of the deadliest pandemic in history.pdf")
+doc = fitz.open("the-strange-case-of-doctor-jekyll-and-mr-hyde-robert-louis-stevenson.pdf")
 length = len(doc)
 
 book = []
@@ -31,4 +31,5 @@ sentences = sent_tokenize(text)
 
 
 # python sent_preprocessing.py
+
 
