@@ -6,7 +6,7 @@ import streamlit as st
 from spacy.cli import download
 import pandas as pd
 import numpy as np
-import test
+import QnA_model as qa
 
 
 if "s_df" not in st.session_state:
@@ -78,9 +78,10 @@ st.subheader("Ask a Question about Article:")
 query = st.text_input("Question", key='query')
 if st.button("ask"):
     if st.session_state.query:
-        st.text(test.ask_question(st.session_state.query.lower()))
+        st.text(qa.ask_question(st.session_state.query.lower()))
 
 # streamlit run main.py
+
 
 
 
