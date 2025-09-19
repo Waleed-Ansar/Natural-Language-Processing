@@ -8,9 +8,8 @@ import pandas as pd
 qa = pipeline("question-answering", model="distilbert-base-cased-distilled-squad")
 
 def ask_question(query):
-    prompt = f"question: {query}  context: {sp.text}"
-    # result = qa(prompt, max_new_tokens=1024)
-    result = qa({"question": query, "context": text})
+    result = qa({"question": query, "context": sp.text})
     answer = result["answer"]
     return answer
+
 
