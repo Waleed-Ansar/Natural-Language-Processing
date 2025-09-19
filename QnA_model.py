@@ -6,7 +6,7 @@ import pandas as pd
 qa = pipeline("question-answering", model="distilbert-base-cased-distilled-squad", tokenizer="distilbert-base-cased-distilled-squad")
 
 def ask_question(query):
- result = qa(
+    result = qa(
         {
             "question": query,
             "context": context
@@ -21,5 +21,6 @@ def ask_question(query):
     # result = qa({"question": query, "context": sp.text})
     answer = result["answer"]
     return answer
+
 
 
