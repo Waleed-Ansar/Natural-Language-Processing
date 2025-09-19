@@ -62,15 +62,21 @@ def search_pos(word):
         return query_pos
 
 # ==== NER ====
-ner = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="average")
+text = "".join(book[40:106])
 
-def all_ners():
-    ners = []
+ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", aggregation_strategy="average")
+
+def all_ner(text):
+    entities = ner(text)
+
+    result = []
     
-    results = ner(book[50:100])
-    for entity in results:
-        ners.append(f"{entity['word']} -> {entity['entity_group']}")
-    return ners
+    for entity in entities:
+        entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
+        entity_name = entity['word']
+        result.append(f"{entity_name} --> {entity_type}")
+ 
+    return (set(result))
 
 def search_ner(word):
     results = ner(word)
@@ -88,6 +94,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
