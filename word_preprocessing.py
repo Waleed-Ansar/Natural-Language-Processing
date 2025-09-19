@@ -1,12 +1,9 @@
-from nltk.tokenize import word_tokenize
 from spacy.lang.en.stop_words import STOP_WORDS
-from flair.models import SequenceTagger
+from nltk.tokenize import word_tokenize
 from nltk import WordNetLemmatizer
 from flair.data import Sentence
 from nltk import FreqDist
 import pandas as pd
-from spacy.cli import download
-import subprocess
 import unicodedata
 import spacy
 import nltk
@@ -95,6 +92,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
