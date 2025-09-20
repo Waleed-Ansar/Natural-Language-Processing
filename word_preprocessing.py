@@ -15,6 +15,7 @@ import re
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
+ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", aggregation_strategy="average")
 
 # ==== Importing and Reading Data ====
 clean_words = []
@@ -64,7 +65,6 @@ def w_main(pdf):
     # ==== NER ====
     text = "".join(book[40:106])
     
-    ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", aggregation_strategy="average")
     result = []
     def all_ners():
         entities = ner(text)
@@ -99,6 +99,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
