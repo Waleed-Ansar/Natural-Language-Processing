@@ -38,7 +38,7 @@ with row[1]:
         for page in pdf_reader.pages:
             if page.extract_text():
                 text += page.extract_text() + "\n"
-print(text)
+
 if text:
     pdf_file = text
     w_main(pdf_file)
@@ -111,6 +111,7 @@ with row[3]:
 
 
 # streamlit run main.py
+
 
 
 
