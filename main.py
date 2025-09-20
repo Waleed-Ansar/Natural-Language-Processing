@@ -1,86 +1,126 @@
 from wordcloud import WordCloud
-import matplotlib.pyplot as plt
+from word_preprocessing import w_main
 import word_preprocessing as wp
+from sent_preprocessing import s_main
 import sent_preprocessing as sp
-import streamlit as st
-from spacy.cli import download
-import pandas as pd
-import numpy as np
+from PyPDF2 import PdfReader
 import QnA_model as qa
-
-
-if "s_df" not in st.session_state:
-    st.session_state.s_df = pd.DataFrame(sp.sentences, columns=['text'])
-    st.session_state.s_df = st.session_state.s_df[st.session_state.s_df["text"] != "."]
-
-if "word_cloud" not in st.session_state:
-    text = " ".join(wp.clean_words)
-    st.session_state.word_cloud = WordCloud(background_color="white", max_words=1000).generate(text)
-
-if "counts" not in st.session_state:
-    st.session_state.counts = wp.counts
-
-if "pos" not in st.session_state:
-    st.session_state.pos = wp.pos
-
-for key in ["show_image", "show_sentences", "show_words", "show_pos", "show_ner"]:
-    if key not in st.session_state:
-        st.session_state[key] = False
-
+import importlib
+import streamlit as st
+import pandas as pd
+import trns
 
 
 st.title("Natural Language Processing Statistics")
+st.subheader("Upload PDF to Check Statistics")
+
+uploaded_file = st.file_uploader("Upload a PDF", type=["pdf"])
+
+st.text('"NOTE: Dummy data is already available for checking, you can continue or upload your own pdf."')
+st.warning("Make sure to 'reset' before uploading to prevent data mixing!")
+
+row = st.columns(5)
+
+text = ""
+with row[0]:
+    if st.button("upload"):
+        if uploaded_file is None:
+            st.error("Upload file first!")
+        else:
+            pdf_reader = PdfReader(uploaded_file)
+            for page in pdf_reader.pages:
+                if page.extract_text():
+                    text += page.extract_text() + "\n"
+
+with row[1]:
+    if st.button("continue"):
+        path = "the-strange-case-of-doctor-jekyll-and-mr-hyde-robert-louis-stevenson.pdf"
+        pdf_reader = PdfReader(path)
+        for page in pdf_reader.pages:
+            if page.extract_text():
+                text += page.extract_text() + "\n"
+
+if text:
+    pdf_file = text
+    w_main(pdf_file)
+    s_main(pdf_file)
+else:
+    pdf_file = ""
+    w_main(pdf_file)
+    s_main(pdf_file)
+
+s_df = pd.DataFrame(sp.sentences, columns=['text'])
+s_df = s_df[s_df["text"] != "."]
+
+text = " ".join(wp.clean_words)
+if text is not "":
+    word_cloud = WordCloud(background_color="white", max_words=1000).generate(text)
+else:
+    st.error("UPLOAD FILE FIRST OR PRESS 'CONTINUE' TO CHECK WITH DUMMY DATA.")
+
+counts = wp.counts
+pos = wp.pos
+ner = wp.ner_words
 
 st.subheader("Show Word Cloud:")
-st.button("Show image", on_click=lambda: st.session_state.update(show_image=True))
-if st.session_state.show_image:
-    st.image(st.session_state.word_cloud.to_array(), use_container_width=True)
+if st.button("Show image"):
+    if text is not "":
+        st.image(word_cloud.to_array(), use_container_width=True)
+    else:
+        st.error("UPLOAD FILE FIRST OR PRESS 'CONTINUE' TO CHECK WITH DUMMY DATA.")
 
 st.subheader("Show All Lines:")
-st.button("Show sentences", on_click=lambda: st.session_state.update(show_sentences=True))
-if st.session_state.show_sentences:
-    st.dataframe(st.session_state.s_df)
+if st.button("Show sentences"):
+    st.dataframe(s_df)
 
 st.subheader("Show Word Frequency Count:")
-st.button("Show words", on_click=lambda: st.session_state.update(show_words=True))
-if st.session_state.show_words:
-    st.dataframe(st.session_state.counts)
+if st.button("Show words"):
+    st.dataframe(counts)
 
 st.subheader("Enter Word to Check Frequency:")
-word = st.text_input("Enter:", key="word_input")
-if st.button("Enter"):
-    if st.session_state.word_input:
-        st.text(wp.search_word(st.session_state.word_input.lower()))
+word = st.text_input("Enter:")
+if st.button("Enter word"):
+    if word:
+        st.text(wp.search_word(word.lower()))
 
 st.subheader("Show All words POS:")
-st.button("Show pos", on_click=lambda: st.session_state.update(show_pos=True))
-if st.session_state.show_pos:
-    st.dataframe(st.session_state.pos)
+if st.button("Show pos"):
+    st.dataframe(pos)
 
 st.subheader("Enter Word to Check POS:")
-wrd = st.text_input("Enter", key='input_word')
-if st.button("search"):
-    if st.session_state.input_word:
-        st.dataframe(wp.search_pos(st.session_state.input_word.lower()))
+wrd = st.text_input("Enter word for POS:")
+if st.button("Search POS"):
+    if wrd:
+        st.dataframe(wp.search_pos(wrd.lower()))
 
+st.subheader("Ask a Question about Article:")
+query = st.text_input("Question")
+if st.button("Ask"):
+    if query:
+        st.text(trns.ask_question(query.lower()))
 st.subheader("Show NER:")
-st.button("Show ner", on_click=lambda: st.session_state.update(show_ner=True))
-if st.session_state.show_ner:
+if st.button("show ner"):
     st.dataframe(wp.all_ners())
 
 st.subheader("Enter Word to Check NER:")
-wrd = st.text_input("Enter", key='input_a_word')
+wrd = st.text_input("Enter")
 if st.button("click"):
-    if st.session_state.input_a_word:
-        st.dataframe(wp.search_ner(st.session_state.input_a_word.capitalize()))
+    st.dataframe(wp.search_ner(wrd.capitalize()))
 
 st.subheader("Ask a Question about Article:")
-query = st.text_input("Question", key='query')
+query = st.text_input("Question")
 if st.button("ask"):
-    if st.session_state.query:
-        st.text(qa.ask_question(st.session_state.query))
+    st.text(qa.ask_question(query))
+
+with row[3]:
+    if st.button("reset"):
+        importlib.reload(wp)
+        importlib.reload(sp)
+        st.session_state.clear()
+
 
 # streamlit run main.py
+
 
 
 
