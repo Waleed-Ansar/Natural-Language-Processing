@@ -8,7 +8,6 @@ import QnA_model as qa
 import importlib
 import streamlit as st
 import pandas as pd
-import trns
 
 
 st.title("Natural Language Processing Statistics")
@@ -121,6 +120,7 @@ with row[3]:
 
 
 # streamlit run main.py
+
 
 
 
