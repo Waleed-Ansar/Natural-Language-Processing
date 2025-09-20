@@ -10,26 +10,22 @@ nltk.download('punkt_tab')
 nltk.download('averaged_perceptron_tagger_eng')
 
 # ==== Importing and Reading Data ====
-doc = fitz.open("the-strange-case-of-doctor-jekyll-and-mr-hyde-robert-louis-stevenson.pdf")
-length = len(doc)
-
 book = []
-for i in range(length):
-    page = doc[i]
-    text = page.get_text()
-    book.append(text)
+def s_main(pdf):
+    global book
+    book = pdf
 
-df = pd.DataFrame(book)
-# df.to_csv('pdf_to_csv.csv', index=False)
+    global text
+    text = book
+    text = re.sub(r'\\n', "", text)
 
-text = " ".join(book)
+    tokens = sent_tokenize(text)
 
-text = re.sub(r'\\n', "", text)
-
-sentences = sent_tokenize(text)
-
+    for token in tokens:
+        sentences.append(token)
 
 
 # python sent_preprocessing.py
+
 
 
