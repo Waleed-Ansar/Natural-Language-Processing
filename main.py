@@ -116,10 +116,12 @@ with row[3]:
     if st.button("reset"):
         importlib.reload(wp)
         importlib.reload(sp)
+        importlib.reload(qa)
         st.session_state.clear()
 
 
 # streamlit run main.py
+
 
 
 
