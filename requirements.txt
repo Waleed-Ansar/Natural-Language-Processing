@@ -9,3 +9,4 @@ transformers
 torch
 langchain
 langchain-huggingface
+PyPDF2
