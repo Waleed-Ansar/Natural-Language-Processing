@@ -26,7 +26,7 @@ def w_main(pdf):
     book = pdf
 
     global text
-    text = " ".join(book)
+    text = book
 
     global tokens
     tokens = word_tokenize(text)
@@ -99,6 +99,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
