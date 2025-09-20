@@ -92,11 +92,6 @@ if st.button("Search POS"):
     if wrd:
         st.dataframe(wp.search_pos(wrd.lower()))
 
-st.subheader("Ask a Question about Article:")
-query = st.text_input("Question")
-if st.button("Ask"):
-    if query:
-        st.text(trns.ask_question(query.lower()))
 st.subheader("Show NER:")
 if st.button("show ner"):
     st.dataframe(wp.all_ners())
@@ -120,6 +115,7 @@ with row[3]:
 
 
 # streamlit run main.py
+
 
 
 
