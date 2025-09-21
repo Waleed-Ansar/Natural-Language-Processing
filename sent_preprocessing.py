@@ -1,5 +1,6 @@
 from nltk.tokenize import sent_tokenize
 from transformers import pipeline
+import nltk
 import re
 
 nltk.download('stopwords')
@@ -37,6 +38,7 @@ def ask_question(query):
 
 
 # python sent_preprocessing.py
+
 
 
 
