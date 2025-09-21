@@ -1,18 +1,17 @@
 from nltk.tokenize import sent_tokenize
-import pandas as pd
-import nltk
-import fitz
+from transformers import pipeline
 import re
 
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
-nltk.download('averaged_perceptron_tagger_eng')
+qa = pipeline("question-answering", model="distilbert-base-cased-distilled-squad")
 
 # ==== Importing and Reading Data ====
 
 sentences = []
 book = []
+tokens = []
 
 def s_main(pdf):
     global book
@@ -22,6 +21,7 @@ def s_main(pdf):
     text = book
     text = re.sub(r'\\n', "", text)
 
+    global tokens
     tokens = sent_tokenize(text)
 
     global sentences
@@ -29,7 +29,15 @@ def s_main(pdf):
         sentences.append(token)
 
 
+def ask_question(query):
+    print(f"text: {text}")
+    result = qa({"question": query, "context": book})
+    answer = result["answer"]
+    return answer
+
+
 # python sent_preprocessing.py
+
 
 
 
