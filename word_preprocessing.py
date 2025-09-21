@@ -20,6 +20,9 @@ ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", 
 # ==== Importing and Reading Data ====
 clean_words = []
 ner_words = []
+book = ""
+counts = 0
+pos = []
 
 def w_main(pdf):
     global book
@@ -65,7 +68,7 @@ def search_pos(word):
         return query_pos
     
 # ==== NER ====
-text = "".join(book[40:106])
+text = book
     
 result = []
 def all_ners():
@@ -82,14 +85,14 @@ def all_ners():
 
 ners = []
 def search_ner(word):
-global ners
+    global ners
 
-results = ner(word)
-for entity in results:
-    entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
-    entity_name = entity['word']
-    ners.append(f"{entity_name} --> {entity_type}")
-return ners
+    results = ner(word)
+    for entity in results:
+        entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
+        entity_name = entity['word']
+        ners.append(f"{entity_name} --> {entity_type}")
+    return ners
 
 # ==== Counting Data ====
 
@@ -101,47 +104,3 @@ def search_word(word):
 
 
 # python word_preprocessing.py
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
