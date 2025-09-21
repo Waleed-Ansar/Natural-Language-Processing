@@ -4,7 +4,6 @@ import word_preprocessing as wp
 from sent_preprocessing import s_main
 import sent_preprocessing as sp
 from PyPDF2 import PdfReader
-import QnA_model as qa
 import importlib
 import streamlit as st
 import pandas as pd
@@ -100,41 +99,10 @@ if st.button("click"):
 st.subheader("Ask a Question about Article:")
 query = st.text_input("Question")
 if st.button("ask"):
-    st.text(qa.ask_question(query))
+    st.text(sp.ask_question(query))
 
 with row[3]:
     if st.button("reset"):
         importlib.reload(wp)
         importlib.reload(sp)
-        importlib.reload(qa)
         st.session_state.clear()
-
-
-# streamlit run main.py
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
