@@ -54,39 +54,40 @@ def w_main(pdf):
     global pos
     pos = nltk.pos_tag(list(set(clean_words)))
     
-    def search_pos(word):
-        words = list(set(clean_words))
-        if word in words:
-            pos_list = []
-            pos_list.append(word)
-            query_pos = nltk.pos_tag(pos_list)
-            return query_pos
+def search_pos(word):
+    words = list(set(clean_words))
+    if word in words:
+        pos_list = []
+        pos_list.append(word)
+        query_pos = nltk.pos_tag(pos_list)
+        return query_pos
     
     # ==== NER ====
     text = "".join(book[40:106])
     
-    result = []
-    def all_ners():
-        entities = ner(text)
+result = []
+def all_ners():
+    entities = ner(text)
+
+    global results
     
-        global results
-        
-        for entity in entities:
-            entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
-            entity_name = entity['word']
-            result.append(f"{entity_name} --> {entity_type}")
+    for entity in entities:
+        entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
+        entity_name = entity['word']
+        result.append(f"{entity_name} --> {entity_type}")
      
         return (set(result))
 ners = []
 def search_ner(word):
-    global ners
-    
-    results = ner(word)
-    for entity in results:
-        entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
-        entity_name = entity['word']
-        ners.append(f"{entity_name} --> {entity_type}")
-    return ners
+global ners
+
+results = ner(word)
+for entity in results:
+    entity_type = entity.get('entity_group', entity.get('entity', 'UNKNOWN'))
+    entity_name = entity['word']
+    ners.append(f"{entity_name} --> {entity_type}")
+return ners
+
 # ==== Counting Data ====
 global counts
 counts = FreqDist(clean_words)
@@ -99,6 +100,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
