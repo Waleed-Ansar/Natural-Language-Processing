@@ -39,7 +39,6 @@ def w_main(pdf):
     words = re.findall(r"[A-Za-zÀ-ÿ]+", words)
 
     global clean_words
-    clean_words = []
     
     # ==== Lemmatizitation ====
     lemmatizer = WordNetLemmatizer()
@@ -49,6 +48,9 @@ def w_main(pdf):
             word = lemmatizer.lemmatize(word)
             word = re.sub(r'\\n', "", word)
             clean_words.append(word.lower())
+
+    global counts
+    counts = FreqDist(clean_words)
     
     # ==== POS ====
     global pos
@@ -62,8 +64,8 @@ def search_pos(word):
         query_pos = nltk.pos_tag(pos_list)
         return query_pos
     
-    # ==== NER ====
-    text = "".join(book[40:106])
+# ==== NER ====
+text = "".join(book[40:106])
     
 result = []
 def all_ners():
@@ -77,6 +79,7 @@ def all_ners():
         result.append(f"{entity_name} --> {entity_type}")
      
         return (set(result))
+
 ners = []
 def search_ner(word):
 global ners
@@ -89,8 +92,6 @@ for entity in results:
 return ners
 
 # ==== Counting Data ====
-global counts
-counts = FreqDist(clean_words)
 
 def search_word(word):
     query_count = FreqDist(clean_words)
@@ -100,6 +101,7 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
 
 
 
