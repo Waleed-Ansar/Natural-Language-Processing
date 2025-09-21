@@ -15,6 +15,7 @@ import re
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
+nltk.download('averaged_perceptron_tagger_eng')
 ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", aggregation_strategy="average")
 
 # ==== Importing and Reading Data ====
@@ -104,3 +105,4 @@ def search_word(word):
 
 
 # python word_preprocessing.py
+
