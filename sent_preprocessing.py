@@ -31,13 +31,13 @@ def s_main(pdf):
 
 
 def ask_question(query):
-    print(f"text: {text}")
     result = qa({"question": query, "context": book})
     answer = result["answer"]
     return answer
 
 
 # python sent_preprocessing.py
+
 
 
 
