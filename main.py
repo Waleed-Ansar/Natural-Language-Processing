@@ -25,6 +25,8 @@ with row[0]:
         if uploaded_file is None:
             st.error("Upload file first!")
         else:
+            importlib.reload(wp)
+            importlib.reload(sp)
             pdf_reader = PdfReader(uploaded_file)
             for page in pdf_reader.pages:
                 if page.extract_text():
@@ -106,3 +108,4 @@ with row[3]:
         importlib.reload(wp)
         importlib.reload(sp)
         st.session_state.clear()
+
