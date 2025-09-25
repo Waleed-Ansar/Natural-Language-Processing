@@ -5,6 +5,7 @@ from sent_preprocessing import s_main
 import sent_preprocessing as sp
 from PyPDF2 import PdfReader
 import importlib
+import fitz
 import streamlit as st
 import pandas as pd
 
@@ -129,5 +130,6 @@ with row[3]:
     if st.button("reset"):
         importlib.reload(wp)
         importlib.reload(sp)
+
 
 
