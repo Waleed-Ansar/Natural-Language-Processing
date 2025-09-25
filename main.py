@@ -20,6 +20,8 @@ st.warning("Make sure to 'reset' before uploading to prevent data mixing!")
 row = st.columns(5)
 
 text = ""
+book = []
+
 with row[0]:
     if st.button("upload"):
         if uploaded_file is None:
@@ -27,6 +29,16 @@ with row[0]:
         else:
             importlib.reload(wp)
             importlib.reload(sp)
+            
+            file = fitz.open(stream=uploaded_file.read(), filetype="pdf")
+            length = len(file)
+            
+            for i in range(length):
+                page = file[i]
+                text = page.get_text()
+                text = re.sub(r'[\d\n]+', "", text)
+                book.append(text)
+            
             pdf_reader = PdfReader(uploaded_file)
             for page in pdf_reader.pages:
                 if page.extract_text():
@@ -34,7 +46,17 @@ with row[0]:
 
 with row[1]:
     if st.button("continue"):
-        path = "the-strange-case-of-doctor-jekyll-and-mr-hyde-robert-louis-stevenson.pdf"
+        path = "the-canterville-ghost-oscar-wilde.pdf"
+
+        file = fitz.open(path)
+        length = len(file)
+
+        for i in range(length):
+            page = file[i]
+            text = page.get_text()
+            text = re.sub(r'[\d\n]+', "", text)
+            book.append(text)
+        
         pdf_reader = PdfReader(path)
         for page in pdf_reader.pages:
             if page.extract_text():
@@ -43,7 +65,7 @@ with row[1]:
 if text:
     pdf_file = text
     w_main(pdf_file)
-    s_main(pdf_file)
+    s_main(pdf_file, book)
 
 s_df = pd.DataFrame(sp.sentences, columns=['text'])
 s_df = s_df[s_df["text"] != "."]
@@ -107,5 +129,5 @@ with row[3]:
     if st.button("reset"):
         importlib.reload(wp)
         importlib.reload(sp)
-        st.session_state.clear()
+
 
