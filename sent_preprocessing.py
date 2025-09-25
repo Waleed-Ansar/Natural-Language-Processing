@@ -41,8 +41,7 @@ model = AutoModelForSeq2SeqLM.from_pretrained("t5-base")
 
 def ask_question(question: str, max_length=64):
     df = pd.DataFrame(context, columns=['text'])
-    lines = df.text
-    print(lines)
+    lines = df
     input_text = f"question: {question}  context: keeping the book in consideration {lines}"
     inputs = tokenizer(input_text, return_tensors="pt").to(model.device)
     out = model.generate(**inputs, max_length=max_length, num_beams=4)
@@ -50,6 +49,7 @@ def ask_question(question: str, max_length=64):
 
 
 # python sent_preprocessing.py
+
 
 
 
