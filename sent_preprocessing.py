@@ -32,14 +32,13 @@ def s_main(pdf):
 
 
 def ask_question(query):
-    df = pd.DataFrame(book, columns=['text'])
-    lines = df.text
-    result = qa({"question": query, "context": lines})
+    result = qa({"question": query, "context": book})
     answer = result["answer"]
     return answer
 
 
 # python sent_preprocessing.py
+
 
 
 
