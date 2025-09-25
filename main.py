@@ -16,8 +16,7 @@ st.subheader("Upload PDF to Check Statistics")
 
 uploaded_file = st.file_uploader("Upload a PDF", type=["pdf"])
 
-st.text('"NOTE: Dummy data is already available for checking, you can continue or upload your own pdf."')
-st.warning("Make sure to 'reset' before uploading to prevent data mixing!")
+st.text('NOTE: "Dummy data is already available for checking, you can continue or upload your own pdf."')
 
 row = st.columns(5)
 
@@ -48,6 +47,9 @@ with row[0]:
 
 with row[1]:
     if st.button("continue"):
+        importlib.reload(wp)
+        importlib.reload(sp)
+        
         path = "the-canterville-ghost-oscar-wilde.pdf"
 
         file = fitz.open(path)
@@ -127,10 +129,7 @@ query = st.text_input("Question")
 if st.button("ask"):
     st.text(sp.ask_question(query))
 
-with row[3]:
-    if st.button("reset"):
-        importlib.reload(wp)
-        importlib.reload(sp)
+
 
 
 
