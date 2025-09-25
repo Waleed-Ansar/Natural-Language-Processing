@@ -1,5 +1,6 @@
 from nltk.tokenize import sent_tokenize
 from transformers import pipeline
+import pandas as pd
 import nltk
 import re
 
@@ -31,12 +32,14 @@ def s_main(pdf):
 
 
 def ask_question(query):
-    result = qa({"question": query, "context": book})
+    df  = pd.DataFrame(book, columns=['text'])
+    result = qa({"question": query, "context": df})
     answer = result["answer"]
     return answer
 
 
 # python sent_preprocessing.py
+
 
 
 
