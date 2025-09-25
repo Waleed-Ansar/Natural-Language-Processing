@@ -32,7 +32,8 @@ def s_main(pdf):
 
 
 def ask_question(query):
-    result = qa({"question": query, "context": book})
+    df = pd.DataFrame(book, columns=['text'])
+    result = qa({"question": query, "context": df.text})
     answer = result["answer"]
     return answer
 
