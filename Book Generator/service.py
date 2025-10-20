@@ -1,11 +1,18 @@
 from openai import OpenAI
-from connection import collection_name
+from connection import collection_name, api_keys
 
-
-api_key = "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"
-client = OpenAI(api_key=api_key)
 
 async def User_Input(req: str):
+    docs = api_keys.find({})
+
+    keys = []
+    async for key in docs:
+        if "_id" in key:
+            del key['_id']
+        keys.append(key['key'])
+
+    client = OpenAI(api_key=keys[0])
+    
     topic = req
     prompt = f"{topic}. write comprehensively and specify book name and chapter names and also explain the chapters."
     
