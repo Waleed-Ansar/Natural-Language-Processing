@@ -3,7 +3,8 @@ import requests
 import re
 from fastapi import APIRouter, FastAPI
 from api import API
-
+import threading
+import uvicorn
 
 app = FastAPI()
 router = APIRouter()
@@ -13,14 +14,11 @@ router.include_router(api.router)
 
 app.include_router(router, prefix='/book_ai')
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(
-        "app:app",
-        host="localhost",
-        port=8000,
-        reload=True
-    )
+
+def run_api():
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+threading.Thread(target=run_api, daemon=True).start()
 
 API_URL = "http://localhost:8000/book_ai"
 
@@ -77,4 +75,5 @@ try:
 except:
 
     st.error("Run API Server First!")
+
 
