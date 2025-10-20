@@ -1,24 +1,7 @@
 import streamlit as st
 import requests
 import re
-from fastapi import APIRouter, FastAPI
-from api import API
-import threading
-import uvicorn
 
-app = FastAPI()
-router = APIRouter()
-api = API()
-
-router.include_router(api.router)
-
-app.include_router(router, prefix='/book_ai')
-
-
-def run_api():
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)
-
-threading.Thread(target=run_api, daemon=True).start()
 
 API_URL = "http://localhost:8000/book_ai"
 
@@ -75,6 +58,7 @@ try:
 except:
 
     st.error("Run API Server First!")
+
 
 
 
