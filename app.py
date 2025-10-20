@@ -1,7 +1,26 @@
 import streamlit as st
 import requests
 import re
+from fastapi import APIRouter, FastAPI
+from api import API
 
+
+app = FastAPI()
+router = APIRouter()
+api = API()
+
+router.include_router(api.router)
+
+app.include_router(router, prefix='/book_ai')
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "main:app",
+        host="localhost",
+        port=8000,
+        reload=True
+    )
 
 API_URL = "http://localhost:8000/book_ai"
 
@@ -56,4 +75,5 @@ try:
                 st.success(f'Book: "{del_title}" is deleted.')
 
 except:
+
     st.error("Run API Server First!")
