@@ -39,12 +39,9 @@ def s_main(pdf, pdf_fitz):
         sentences.append(token)
 
 
-tokenizer = AutoTokenizer.from_pretrained("t5-base")
-model = AutoModelForSeq2SeqLM.from_pretrained("t5-base")
-
-def ask_question(question: str, max_length=64):
-    code = "c2stcHJvai1KeFhMZl9Zam1OSU1EVUZqMk9oYXJrMEx0S3hLMDYyZXNXVmhnSm9pMHNrRW5oWWt6S3NuajYxTEowMmh2Ykt1Vk8wUnNQN1N4V1QzQmxia0ZKQ1hPNWxMNnBQRHhjcnZTSlEtQVFSeFd6MUwzYzB5aXhSWkVZbmJCdERxMHc0dDBXbHA0elkzdGp2MUpXR0FncG5RRGwyWEZNUUE="
-    key = base64.b64decode(code).decode('utf-8')
+code = "c2stcHJvai1KeFhMZl9Zam1OSU1EVUZqMk9oYXJrMEx0S3hLMDYyZXNXVmhnSm9pMHNrRW5oWWt6S3NuajYxTEowMmh2Ykt1Vk8wUnNQN1N4V1QzQmxia0ZKQ1hPNWxMNnBQRHhjcnZTSlEtQVFSeFd6MUwzYzB5aXhSWkVZbmJCdERxMHc0dDBXbHA0elkzdGp2MUpXR0FncG5RRGwyWEZNUUE="
+key = base64.b64decode(code).decode('utf-8')
+def ask_question(question: str):
     client = OpenAI(api_key=key)
 
     prompt = f"""
@@ -68,6 +65,7 @@ def ask_question(question: str, max_length=64):
 
 
 # python sent_preprocessing.py
+
 
 
 
