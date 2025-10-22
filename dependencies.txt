@@ -1,12 +1,13 @@
-wordcloud dfgdfg
-matplotlib dfghfgh
-pandas fghf gh
-nltk fghfghf
-pymupdf fghfgh
-spacy fghfgh
-flair fghfgh
-transformers fghfgh
-torch fghfgh
-langchain fghfgh
-langchain-huggingface fghfgh 
-PyPDF2 fghfghf
+wordcloud
+matplotlib
+pandas
+nltk
+pymupdf
+spacy
+flair
+transformers
+torch
+langchain
+langchain-huggingface 
+PyPDF2
+openai==1.50.2
