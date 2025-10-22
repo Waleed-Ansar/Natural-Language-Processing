@@ -9,7 +9,6 @@ import os
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
-qa = pipeline("question-answering", model="distilbert-base-cased-distilled-squad")
 
 # ==== Importing and Reading Data ====
 
@@ -66,6 +65,7 @@ def ask_question(question: str):
 
 
 # python sent_preprocessing.py
+
 
 
 
