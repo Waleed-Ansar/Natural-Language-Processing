@@ -42,11 +42,14 @@ def s_main(pdf, pdf_fitz):
 code = "c2stcHJvai1KeFhMZl9Zam1OSU1EVUZqMk9oYXJrMEx0S3hLMDYyZXNXVmhnSm9pMHNrRW5oWWt6S3NuajYxTEowMmh2Ykt1Vk8wUnNQN1N4V1QzQmxia0ZKQ1hPNWxMNnBQRHhjcnZTSlEtQVFSeFd6MUwzYzB5aXhSWkVZbmJCdERxMHc0dDBXbHA0elkzdGp2MUpXR0FncG5RRGwyWEZNUUE="
 key = base64.b64decode(code).decode('utf-8')
 def ask_question(question: str):
+    df = pd.DataFrame(context, columns=['text'])
+    lines = df.text
+    
     client = OpenAI(api_key=key)
 
     prompt = f"""
         Answer the question: '{question}'  based on the provided context only containing data
-        from context\n{file}\n\n if exists in the context otherwise tell nothing is present in context
+        from context\n{lines}\n\n if exists in the context otherwise tell nothing is present in context
         related to your question.
     """
 
@@ -65,6 +68,7 @@ def ask_question(question: str):
 
 
 # python sent_preprocessing.py
+
 
 
 
