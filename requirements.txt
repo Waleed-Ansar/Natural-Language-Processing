@@ -10,4 +10,4 @@ torch
 langchain
 langchain-huggingface 
 PyPDF2
-openai==1.50.2
+openai
