@@ -1,6 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from nltk.tokenize import sent_tokenize
 from transformers import pipeline
+from openai import OpenAI
 import pandas as pd
 import base64
 import nltk
@@ -67,6 +68,7 @@ def ask_question(question: str, max_length=64):
 
 
 # python sent_preprocessing.py
+
 
 
 
