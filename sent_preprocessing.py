@@ -4,6 +4,7 @@ from transformers import pipeline
 import pandas as pd
 import nltk
 import re
+import os
 
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -40,23 +41,31 @@ tokenizer = AutoTokenizer.from_pretrained("t5-base")
 model = AutoModelForSeq2SeqLM.from_pretrained("t5-base")
 
 def ask_question(question: str, max_length=64):
-    df = pd.DataFrame(context, columns=['text'])
-    pd.set_option("display.max_colwidth", 100)
-    lines = df
-    # input_text = f"question: {question}  context: keeping the book in consideration {lines}"
-    input_text = f"""
-    You are a helpful book assistant.
-    Answer the question only using the context provided.
+    key = os.getenv('api_key')
+    client = OpenAI(api_key=key)
 
-    question: {question}
-    context: {lines}
+    prompt = f"""
+        Answer the question: '{question}'  based on the provided context only containing data
+        from context\n{file}\n\n if exists in the context otherwise tell nothing is present in context
+        related to your question.
     """
-    inputs = tokenizer(input_text, return_tensors="pt").to(model.device)
-    out = model.generate(**inputs, max_length=max_length, num_beams=4)
-    return tokenizer.decode(out[0], skip_special_tokens=True)
+
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant who is master in answering questions based on given context in only one line and strictly related to topic."},
+            {"role": "user", "content": f"{prompt}"}
+        ],
+        temperature=0.5
+    )
+
+    response = resp.choices[0].message.content
+    return response
 
 
 # python sent_preprocessing.py
+
 
 
 
